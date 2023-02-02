@@ -42,6 +42,12 @@ Activity to use the `ModelConverter` to convert the
 and then uncomment and run the `AddSongToPlaylistActivityTest`
 unit tests.
 
+Since we're only partially implementing the `AddSongToPlaylistActivity` class in this sprint, you only need the following tests to pass to complete this Mastery Task:
+
+- handleRequest_validRequest_addsSongToEndOfPlaylist
+- handleRequest_noMatchingPlaylistId_throwsPlaylistNotFoundException
+- handleRequest_noMatchingAlbumTrack_throwsAlbumTrackNotFoundException
+
 Once your tests pass, upload your code to Lambda and ensure it works.
 
 ### Milestone 2: Implement GetPlaylistSongsActivity
@@ -61,6 +67,12 @@ list.
 To return the result of this activity, 
 we'll have to convert the `AlbumTrack`'s to our API
 defined `SongModel` class and add them in a list in the `GetPlaylistSongsResult`.
+
+Since we're only partially implementing the `GetPlaylistSongsActivity` class in this sprint, you only need the following tests to pass to complete this Mastery Task:
+
+- handleRequest_playlistExistsWithSongs_returnsSongsInPlaylist
+- handleRequest_playlistExistsWithoutSongs_returnsEmptyList
+- handleRequest_noMatchingPlaylistId_throwsPlaylistNotFoundException
 
 ### Doneness Checklist
 
