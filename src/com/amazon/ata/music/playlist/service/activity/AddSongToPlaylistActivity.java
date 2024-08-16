@@ -56,5 +56,6 @@ public class AddSongToPlaylistActivity implements RequestHandler<AddSongToPlayli
         return AddSongToPlaylistResult.builder()
                 .withSongList(Collections.singletonList(new SongModel()))
                 .build();
+        
     }
 }
