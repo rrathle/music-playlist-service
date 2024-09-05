@@ -45,10 +45,18 @@ class PlaylistDao{
 
 
 class AlbumTrackNotFoundException{
+- serialVersionUID: long
+}
+class InvalidAttributeException {
 }
 class InvalidAttributeValueException {
+- serialVersionUID: long
 }
+class InvalidAttributeChangeException {
+- serialVersionUID: long
+ }
 class PlaylistNotFoundException {
+- serialVersionUID: long
 }
 
 
@@ -77,6 +85,9 @@ AddSongToPlaylistActivity  o-- PlaylistDao
 GetPlaylistActivity  o-- PlaylistDao
 GetPlaylistSongsActivity  o-- PlaylistDao
 UpdatePlaylistActivity  o-- PlaylistDao
+InvalidAttributeException <|-- InvalidAttributeChangeException
+InvalidAttributeException <|-- InvalidAttributeValueException
+
 
 
 
