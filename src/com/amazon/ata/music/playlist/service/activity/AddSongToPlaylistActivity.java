@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,8 @@ public class AddSongToPlaylistActivity implements RequestHandler<AddSongToPlayli
         log.info("Received AddSongToPlaylistRequest {} ", addSongToPlaylistRequest);
 // fetch playlist
         Playlist playlist = playlistDao.getPlaylist(addSongToPlaylistRequest.getId());
+
+        LinkedList<AlbumTrack> songLinkedList = new LinkedList<>(playlist.getSongList());
         if (playlist == null) {
             throw new PlaylistNotFoundException("Playlist not found for id: " + addSongToPlaylistRequest.getId());
         }

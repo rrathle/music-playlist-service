@@ -3,6 +3,7 @@ package com.amazon.ata.music.playlist.service.activity;
 import com.amazon.ata.music.playlist.service.converters.ModelConverter;
 import com.amazon.ata.music.playlist.service.dynamodb.models.Playlist;
 import com.amazon.ata.music.playlist.service.exceptions.PlaylistNotFoundException;
+import com.amazon.ata.music.playlist.service.models.SongOrder;
 import com.amazon.ata.music.playlist.service.models.requests.GetPlaylistSongsRequest;
 import com.amazon.ata.music.playlist.service.models.results.GetPlaylistSongsResult;
 import com.amazon.ata.music.playlist.service.models.SongModel;
@@ -56,6 +57,12 @@ public class GetPlaylistSongsActivity implements RequestHandler<GetPlaylistSongs
             throw new PlaylistNotFoundException("PlayList not found with ID: " + getPlaylistSongsRequest.getId());
         }
         // Convert the playlists albumtack lis to SongModel List using ModelConverter
+        //
+        if(getPlaylistSongsRequest.getOrder().equals(SongOrder.REVERSED)) {
+            Collections.reverse(playlist.getSongList()); //collections used on Arrays
+        } else if (getPlaylistSongsRequest.getOrder().equals(SongOrder.SHUFFLED)) {
+            Collections.shuffle(playlist.getSongList());
+        }
         List<SongModel> songModels = new ModelConverter().toSongModel(playlist.getSongList());
 
 
