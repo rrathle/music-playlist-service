@@ -73,11 +73,15 @@ public class AddSongToPlaylistActivity implements RequestHandler<AddSongToPlayli
 //fetch the albumTack
         AlbumTrack albumTrack = albumTrackDao.getAlbumTrack(addSongToPlaylistRequest.getAsin(), addSongToPlaylistRequest.getTrackNumber());
         if (albumTrack == null) {
-            throw new AlbumTrackNotFoundException("Album track not dounf for ASIN: " + addSongToPlaylistRequest.getAsin() + " and track number: " + addSongToPlaylistRequest.getTrackNumber());
+            throw new AlbumTrackNotFoundException("Album track not found for ASIN: " + addSongToPlaylistRequest.getAsin() + " and track number: " + addSongToPlaylistRequest.getTrackNumber());
         }
 
         // Step 3: Add the album track to the playlist's song list
-        playlist.getSongList().add(albumTrack);
+        if ( addSongToPlaylistRequest.isQueueNext()) {
+            playlist.getSongList().add(0, albumTrack);
+        } else {
+            playlist.getSongList().add(albumTrack);
+        }
 
         // Step 4: Save the updated playlist
         playlistDao.savePlaylist(playlist);

@@ -57,11 +57,13 @@ public class GetPlaylistSongsActivity implements RequestHandler<GetPlaylistSongs
             throw new PlaylistNotFoundException("PlayList not found with ID: " + getPlaylistSongsRequest.getId());
         }
         // Convert the playlists albumtack lis to SongModel List using ModelConverter
-        //
-        if(getPlaylistSongsRequest.getOrder().equals(SongOrder.REVERSED)) {
-            Collections.reverse(playlist.getSongList()); //collections used on Arrays
-        } else if (getPlaylistSongsRequest.getOrder().equals(SongOrder.SHUFFLED)) {
-            Collections.shuffle(playlist.getSongList());
+
+        if (getPlaylistSongsRequest.getOrder() != null) {
+            if (getPlaylistSongsRequest.getOrder().equals(SongOrder.REVERSED)) {
+                Collections.reverse(playlist.getSongList()); //collections used on Arrays
+            } else if (getPlaylistSongsRequest.getOrder().equals(SongOrder.SHUFFLED)) {
+                Collections.shuffle(playlist.getSongList());
+            }
         }
         List<SongModel> songModels = new ModelConverter().toSongModel(playlist.getSongList());
 
